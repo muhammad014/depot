@@ -7,6 +7,9 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
 Depot::Application.routes.draw do
+  #devise_for :users
+
+
   get 'admin' => 'admin#index'
   controller :sessions do
     get  'login' => :new
