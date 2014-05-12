@@ -7,7 +7,7 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
 class LineItemsController < ApplicationController
-  skip_before_filter :authorize, only: :create
+  skip_before_filter :authenticate_user!, only: :create
   # GET /line_items
   # GET /line_items.json
   def index

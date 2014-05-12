@@ -1,7 +1,8 @@
 class CartsController < ApplicationController
   # GET /carts
   # GET /carts.json
-  skip_before_filter :authorize, only: [:create, :upate, :destroy]
+  skip_before_filter :authenticate_user!, only: [:index, :create, :upate, :destroy]
+  
   def index
     @carts = Cart.all
 

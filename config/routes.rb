@@ -7,17 +7,19 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
 Depot::Application.routes.draw do
-  #devise_for :users
+  devise_for :users#, path_names: {sign_in: "login", sign_out: "logout"}
+  
+  root :to => 'carts#index'
 
 
   get 'admin' => 'admin#index'
-  controller :sessions do
-    get  'login' => :new
-    post 'login' => :create
-    delete 'logout' => :destroy
-  end
+  # controller :sessions do
+  #   get  'login' => :new
+  #   post 'login' => :create
+  #   delete 'logout' => :destroy
+  # end
   scope '(:locale)' do
-    resources :users
+    # resources :users
     resources :orders
     resources :line_items
     resources :carts

@@ -2,11 +2,12 @@
 
 class ProductsController < ApplicationController
   # GET /products
-  # GET /products.json
+before_filter :authenticate_user!
   
   def index
     @products = Product.all
-
+    @uploader= Product.new.image
+    @uploader.success_action_redirect = new_product_url
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @products }
@@ -27,12 +28,12 @@ class ProductsController < ApplicationController
   # GET /products/new
   # GET /products/new.json
   def new
-    @product = Product.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @product }
-    end
+    #@product = Product.new
+@product = Product.new(key: params[:key])
+    #respond_to do |format|
+     # format.html # new.html.erb
+      #format.json { render json: @product }
+    #end
   end
 
   # GET /products/1/edit
@@ -42,11 +43,25 @@ class ProductsController < ApplicationController
 
   # POST /products
   # POST /products.json
+
+
+
+
+
   def create
     @product = Product.new(params[:product])
 
+p "product: #{@product.inspect}"
     respond_to do |format|
+      p "bf s ================"
       if @product.save
+
+        ImageHighlighter.perform_async(@product.id)
+
+        
+        #Resque.enqueue(ImageHighlighter,params[:product])
+        #Resque.enqueue(ImageHighlighter,@product.id)
+        #redirect_to @product, notice: 'Product was successfully created.'        
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else

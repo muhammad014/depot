@@ -7,9 +7,18 @@ gem 'rails', '3.2.0'
 
 gem 'sqlite3'
 
-#gem 'devise','1.1.rc0'
+gem 'devise', '1.4.7'
 
 gem 'bcrypt-ruby', '~> 3.0.0'
+
+gem 'carrierwave'
+
+gem "rmagick"
+
+gem "fog"
+
+gem 'carrierwave_direct'
+gem 'sidekiq'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -25,6 +34,8 @@ end
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'will_paginate','~>3.0'
+
+gem 'resque'
 
 gem 'capistrano'
 
